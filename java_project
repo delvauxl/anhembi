@@ -1,0 +1,51 @@
+import java.util.LinkedList;
+import java.util.Stack;
+import java.util.Queue;
+
+public class ProjetoListaPilhaFila {
+
+    public static void main(String[] args) {
+        // Passo 1: Insere os números [1, 2, 3, 4 e 5] na lista
+        LinkedList<Integer> lista = new LinkedList<Integer>();
+        lista.add(1);
+        lista.add(2);
+        lista.add(3);
+        lista.add(4);
+        lista.add(5);
+
+        // Passo 2: Remove todos os dados da lista e insere-os na Pilha
+        Stack<Integer> pilha = new Stack<Integer>();
+        while (!lista.isEmpty()) {
+            pilha.push(lista.removeFirst());
+        }
+
+        // Passo 3: Remove os dados da Pilha e insere-os na Fila
+        Queue<Integer> fila = new LinkedList<Integer>();
+        while (!pilha.isEmpty()) {
+            fila.offer(pilha.pop());
+        }
+
+        // Passo 4: Insere os números [6, 7, 8, 9 e 10] na lista
+        lista.add(6);
+        lista.add(7);
+        lista.add(8);
+        lista.add(9);
+        lista.add(10);
+
+        // Passo 5: Repete os passos 2 e 3
+        while (!lista.isEmpty()) {
+            while (!lista.isEmpty()) {
+                pilha.push(lista.removeFirst());
+            }
+            while (!pilha.isEmpty()) {
+                fila.offer(pilha.pop());
+            }
+        }
+
+        // Passo 6: Exibe todos os números que foram inseridos na fila
+        System.out.println("Números na fila:");
+        while (!fila.isEmpty()) {
+            System.out.println(fila.poll());
+        }
+    }
+}
